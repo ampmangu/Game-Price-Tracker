@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mongo:
+    #    TODO Use proper pwd handling
+    image: mongo:4.4.6
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    hostname: mongo
+    container_name: mongo-game
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=game
+      - MONGO_INITDB_ROOT_PASSWORD=sUpAmAry0
+    volumes:
+      - ~/volumes/game:/data/db
+    networks:
+      - game-tracker
+    command: [ "--bind_ip", "0.0.0.0" ]
+
+
+networks:
+  game-tracker:
+    driver: bridge
